@@ -1,3 +1,5 @@
+import configparser
+
 from kivy.clock import Clock
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
@@ -18,8 +20,31 @@ class GeneratorScreen(Screen):
         # Clock.schedule_once(self.after_init)
         self.app = MDApp.get_running_app()
 
-    def on_kv_post(self, base_widget):
-        self.generate()
+    # def on_kv_post(self, base_widget):
+    #     self.generate()
+    #     print(self.app.check())
+    #     print("show",self.app.show)
+
+    def on_pre_enter(self, *args):
+        print("pre show", self.app.show)
+
+    def on_enter(self, *args):
+        print("pre show", self.app.show)
+        read_config = configparser.ConfigParser()
+        name = 0
+        try:
+            read_config.read("generator.ini")
+            name = read_config.get("Example", "bool")
+        except configparser.NoOptionError:
+            pass
+
+        if name == '1':
+            self.ids.special_switch.active = True
+
+    # def o
+
+    def check_config(self):
+        print(self.app.show)
 
     def set_special(self):
         print('special executed')

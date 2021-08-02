@@ -2,150 +2,91 @@
 
 <GeneratorScreen>:
     do_default_tab: True
-    MDFloatLayout:
-        radius: [25, 0, 0, 0]
-#        md_bg_color: app.theme_cls.primary_color
+    BoxLayout:
         orientation: 'vertical'
+        MDToolbar:
+            title: 'Generator'
+            right_action_items: [["dots-vertical", lambda x: app.open_settings() ]]
 
-        MDLabel:
-            pos_hint: {"center_x": 0.21, "center_y": 0.7}
-            size_hint: (.8, .1)
-            text: str(int(input_value.value))
-            halign: "center"
-            font_style: "H6"
-            theme_text_color: "Primary"
-            id: one
+        MDFloatLayout:
+            radius: [25, 0, 0, 0]
+            orientation: 'vertical'
 
-        MDSlider:
-            min: 0
-            max: 128
-            value: 8
-            id: input_value
-            pos_hint: {"center_x": 0.6, "center_y": 0.7}
-            size_hint: .5, None
-#            on_touch_move: root.generate(2,3)
-#            on_active: root.generate()
-            on_value: root.value_check()
-#            on
+            MDLabel:
+                pos_hint: {"center_x": 0.21, "center_y": 0.7}
+                size_hint: (.8, .1)
+                text: str(int(input_value.value))
+                halign: "center"
+                font_style: "H6"
+                theme_text_color: "Primary"
+                id: one
 
-
-        MDLabel:
-            text: "Special"
-            pos_hint: {"center_x": 0.7, "center_y":0.5}
-            theme_text_color: "Primary"
-
-        MDSwitch:
-            id: special_switch
-            pos_hint: {"center_x": 0.8, "center_y":0.5}
-            on_active: root.generate(2,3)
+            MDSlider:
+                min: 0
+                max: 128
+                value: 8
+                id: input_value
+                pos_hint: {"center_x": 0.6, "center_y": 0.7}
+                size_hint: .5, None
+                on_value: root.value_check()
 
 
-        MDLabel:
-            text: "DIgits"
-            pos_hint: {"center_x": 0.7, "center_y":0.6}
-            theme_text_color: "Primary"
-        MDSwitch:
-            id: digits_switch
-            pos_hint: {"center_x": 0.8, "center_y":0.6}
-            on_active: root.generate(2,3)
 
-#        MDGridLayout:
-#            cols: 4
-#            padding: 20
-#            pos_hint: {"center_x": 0.6, "center_y":0.3}
-#
-#            MDLabel:
-#                text: 'one'
-#            MDLabel:
-#                text: 'two'
-#            MDTextButton:
-#                text: '-'
-#
-#                size_hint: 1,0.2
-#
-#                icon: 'minus'
-#
-#            MDRaisedButton:
-#                text: 'four'
-#                size_hint: 1,0.2
+            MDLabel:
+                text: "Special"
+                pos_hint: {"center_x": 0.7, "center_y":0.5}
+                theme_text_color: "Primary"
+
+            MDSwitch:
+                id: special_switch
+                pos_hint: {"center_x": 0.8, "center_y":0.5}
+                on_active: root.generate(2,3)
 
 
-#
-#        ScrollableLabel:
-        MDLabel:
-            id: result
-#            pos_hint: {"x": .5, "top": .33}
-            pos_hint: {"center_x":0.5, "center_y":0.85}
-            size_hint: 0.65, None     # <<<<<<<<<<
-            height: self.texture_size[1]   # <<<<<<<<<<
-#            scroll_y: True
-#            do_scroll_y: True
-            text_size: self.width, None
-            text: " "
-            markup: True
-            halign: "center"
-#            halign:"left"
-            valign:"middle"
-            allow_copy: True
-            theme_text_color: "Primary"
+            MDLabel:
+                text: "DIgits"
+                pos_hint: {"center_x": 0.7, "center_y":0.6}
+                theme_text_color: "Primary"
+            MDSwitch:
+                id: digits_switch
+                pos_hint: {"center_x": 0.8, "center_y":0.6}
+                on_active: root.generate(2,3)
 
-        MDRaisedButton:
-            text: "Regenerate Password"
-            pos_hint: {"center_x": 0.5, "center_y":0.2}
-#            size_hint: .7,None
-            on_press: root.generate(2,3)
+            MDLabel:
+                id: result
+    #            pos_hint: {"x": .5, "top": .33}
+                pos_hint: {"center_x":0.5, "center_y":0.85}
+                size_hint: 0.65, None     # <<<<<<<<<<
+                height: self.texture_size[1]   # <<<<<<<<<<
+    #            scroll_y: True
+    #            do_scroll_y: True
+                text_size: self.width, None
+                text: " "
+                markup: True
+                halign: "center"
+    #            halign:"left"
+                valign:"middle"
+                allow_copy: True
+                theme_text_color: "Primary"
 
+            MDRaisedButton:
+                text: "Regenerate Password"
+                pos_hint: {"center_x": 0.5, "center_y":0.2}
+    #            size_hint: .7,None
+                on_press: root.generate(2,3)
 
-        MDRaisedButton:
-            text: "Copy Password"
-            pos_hint: {"center_x": 0.5, "center_y":0.1}
-#            size_hint: .7,None
-            on_release: root.clean_text()
-        MDLabel
-#        MDCheckbox:
-#            size_hint: None, None
-#            size: "48dp", "48dp"
-#            background_color: rgba(23,21,22,1)
-#            pos_hint: {'center_x': .5, 'center_y': .4}
-#        Check:
-#            id: onds
-#            pos_hint: {'x': 0.1,'y':0.8}
-#        Check:
-#            id: onds
-#            pos_hint: {'x': 0.2,'y':0.8}
-#        MDSwitch:
-#            id: switch
-#        MDLabel:
-#            text: 'woooooooooooh' if switch.active else ''
-#        MDLabel:
-#            pos_hint: {"x": .2, "top": .91}
-#            size_hint: (.6, .1)
-#            text: "Change Theme: "
-#            halign: "center"
-#            font_style: "H6"
-#            theme_text_color: "Primary"
-#
-#        MDSwitch:
-#            id: mode
-#            pos_hint: {"x": .2, "y": .2}
-#            on_active: root.change_mode(*args)
-#        MDLabel:
-#            pos_hint: {"x": .04, "top": .91}
-#            size_hint: (.6, .1)
-#            text: "Change Theme: "
-#            halign: "center"
-#            font_style: "H6"
-#            theme_text_color: "Primary"
-#
-#        MDSwitch:
-#            id: mode
-#            pos_hint: {"x": .7, "top": .9}
-#            on_active: root.change_mode(*args)
+            MDRaisedButton:
+                text: "check conifg"
+                pos_hint: {"center_x": 0.5, "center_y":0.15}
+    #            size_hint: .7,None
+                on_press: root.check_config()
 
-#        MDTextField:
-#            text: "3"
-#            pos_hint: {"center_x": 0.5, "center_y":0.5}
-#            size_hint: (.2, .1)
+            MDRaisedButton:
+                text: "Copy Password"
+                pos_hint: {"center_x": 0.5, "center_y":0.1}
+    #            size_hint: .7,None
+                on_release: root.clean_text()
+            MDLabel
 
 
 
