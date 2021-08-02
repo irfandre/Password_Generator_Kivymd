@@ -1,0 +1,7 @@
+#:include kv/generatorscreen.kv
+BoxLayout:
+    orientation: 'vertical'
+    MDToolbar:
+        title: 'Generator'
+        right_action_items: [["dots-vertical", lambda x: app.open_settings() ]]
+    GeneratorScreen:
