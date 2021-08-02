@@ -13,7 +13,7 @@ package.domain = org.MI
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,kv,png,jpg,jpeg,atlas,ttf,json
+source.include_exts = py,kv,png,jpg,jpeg,atlas,ttf,json,ini
 
 # (list) List of inclusions using pattern matching
 #source.include_patterns = assets/*,images/*.png

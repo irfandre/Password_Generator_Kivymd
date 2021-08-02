@@ -12,7 +12,7 @@ from kivymd.uix.snackbar import Snackbar
 from kivy.uix.scrollview import ScrollView
 from kivymd.uix.bottomnavigation import MDBottomNavigationItem
 from kivy.properties import StringProperty
-
+from kivy.config import Config
 
 class GeneratorScreen(Screen):
     def __init__(self, **kw):
@@ -20,10 +20,8 @@ class GeneratorScreen(Screen):
         # Clock.schedule_once(self.after_init)
         self.app = MDApp.get_running_app()
 
-    # def on_kv_post(self, base_widget):
-    #     self.generate()
-    #     print(self.app.check())
-    #     print("show",self.app.show)
+    def on_kv_post(self, base_widget):
+        self.generate()
 
     def on_pre_enter(self, *args):
         print("pre show", self.app.show)
@@ -37,6 +35,10 @@ class GeneratorScreen(Screen):
             name = read_config.get("Example", "bool")
         except configparser.NoOptionError:
             pass
+        except configparser.NoSectionError:
+            pass
+
+        # Config.get("Example", "bool")
 
         if name == '1':
             self.ids.special_switch.active = True

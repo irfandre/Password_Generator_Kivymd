@@ -28,6 +28,9 @@
                 id: input_value
                 pos_hint: {"center_x": 0.6, "center_y": 0.7}
                 size_hint: .5, None
+                hint: False
+
+                color: app.theme_cls.primary_color
                 on_value: root.value_check()
 
 
@@ -74,12 +77,6 @@
                 pos_hint: {"center_x": 0.5, "center_y":0.2}
     #            size_hint: .7,None
                 on_press: root.generate(2,3)
-
-            MDRaisedButton:
-                text: "check conifg"
-                pos_hint: {"center_x": 0.5, "center_y":0.15}
-    #            size_hint: .7,None
-                on_press: root.check_config()
 
             MDRaisedButton:
                 text: "Copy Password"
