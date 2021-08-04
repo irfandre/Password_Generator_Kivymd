@@ -44,7 +44,7 @@ class LiveApp(App, MDApp):
 
     def on_start(self):
         print(self.sm.current)
-        Clock.schedule_once(self.gen_scren, 1000)
+        # Clock.schedule_once(self.gen_scren, 1000)
     # def on
     def gen_scren(self):
         self.sm.current = 'generator_screen'
@@ -65,7 +65,10 @@ class LiveApp(App, MDApp):
         })
 
     def on_config_change(self, config, section, key, value):
-        print(config, section, key, value)
+        print(config.get('Example', 'bool'))
+        if config.get('Example', 'bool') == '1':
+            self.sm.current = 'intro_screen'
+            self.close_settings()
 
 
 LiveApp().run()
