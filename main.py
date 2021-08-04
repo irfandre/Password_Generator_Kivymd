@@ -1,6 +1,5 @@
-from kivy.clock import Clock
-from kivy.config import ConfigParser
-from kivy.uix.screenmanager import ScreenManager, Screen, SwapTransition, NoTransition
+
+from kivy.uix.screenmanager import ScreenManager, NoTransition
 from kivymd.app import MDApp
 from kivy.lang import Builder
 
@@ -42,15 +41,14 @@ class GeneratorApp(MDApp):
         # self.use_kivy_settings = False
         self.show = self.config.get('Example', 'bool')
         print("from build",self.show)
-
         return self.sm
 
     def on_start(self):
         print("from start " , self.show)
-
+        self.toggle_screen(self.config.get('Example', 'bool'))
+        self.toggle_darkmode(self.config.get('Example', 'darkmode'))
 
     def set_special(self, config):
-
         if config.get('Example', 'bool'):
             print('1')
 
@@ -81,6 +79,9 @@ class GeneratorApp(MDApp):
 
         elif key == 'bool':
             self.toggle_screen(value)
+
+    def config_checker(self, config):
+        pass
 
     def toggle_screen(self, value):
         if value == '1':
