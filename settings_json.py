@@ -14,6 +14,14 @@ setting_json = json.dumps([
                 'key': 'bool'
 
             },
+            {
+                'type' : 'bool',
+                'title': 'Dark Mode',
+                'desc': 'Enable/Disable Dark Mode',
+                'section': 'Example',
+                'key': 'darkmode'
+
+            },
             # {
             #     'type': 'title',
             #     'title': 'title2'

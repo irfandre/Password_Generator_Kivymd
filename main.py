@@ -48,6 +48,7 @@ class GeneratorApp(MDApp):
     def on_start(self):
         print("from start " , self.show)
 
+
     def set_special(self, config):
 
         if config.get('Example', 'bool'):
@@ -63,7 +64,8 @@ class GeneratorApp(MDApp):
 
     def build_config(self, config):
         config.setdefaults('Example', {
-            'bool': True
+            'bool': True,
+            'darkmode': False
         })
         config.setdefaults('Example2', {
             'bool': True
@@ -71,9 +73,26 @@ class GeneratorApp(MDApp):
 
     def on_config_change(self, config, section, key, value):
         print(config, section, key, value)
-        if config.get('Example', 'bool') == '1':
+        # if config.get('Example', 'bool') == '1':
+        #     self.sm.current = 'intro_screen'
+        #     self.close_settings()
+        if key == 'darkmode':
+            self.toggle_darkmode(value)
+
+        elif key == 'bool':
+            self.toggle_screen(value)
+
+    def toggle_screen(self, value):
+        if value == '1':
             self.sm.current = 'intro_screen'
             self.close_settings()
+        else:
+            pass
+    def toggle_darkmode(self, value):
+        if value == '1':
+            self.theme_cls.theme_style = "Dark"
+        else:
+            self.theme_cls.theme_style = "Light"
 
 
 if __name__ == '__main__':
