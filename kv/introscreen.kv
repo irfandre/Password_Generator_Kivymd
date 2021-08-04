@@ -67,41 +67,43 @@
 
     MDRaisedButton:
         id: bu
-        text: "hello"
+        text: "Start"
         adaptive_height: True
 #        x: box.x
         bold: True
         md_bg_color: get_color_from_hex('F49C8A')
         halign: 'center'
         pos_hint: {'center_x':0.5}
-        y: box.y - big_pic.y - self.height
+#        size;
+#        size_hint: 0.7,None
+        y: big_pic.y -  self.height
         on_release: root.goto_gen()
 
-    MDLabel:
-        id: one
-        text: 'one'
-        size_hint: None, None
-#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
-        x: box.x
-        y: bu.y - self.height
-        adaptive_height: True
-#        pos_hint: {'center_x':.5}
-    MDLabel:
-        id: two
-        text: 'two'
-        size_hint: None, None
-#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
-        x: box.x
-        y: one.y -self.height
-        adaptive_height: True
-
-    MDLabel:
-        text: 'two'
-        size_hint: None, None
-#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
-        x: box.x
-        y: two.y - self.height
-        adaptive_height: True
+#    MDLabel:
+#        id: one
+#        text: 'one'
+#        size_hint: None, None
+##        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+#        x: box.x
+#        y: bu.y - self.height
+#        adaptive_height: True
+##        pos_hint: {'center_x':.5}
+#    MDLabel:
+#        id: two
+#        text: 'two'
+#        size_hint: None, None
+##        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+#        x: box.x
+#        y: one.y -self.height
+#        adaptive_height: True
+#
+#    MDLabel:
+#        text: 'two'
+#        size_hint: None, None
+##        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+#        x: box.x
+#        y: two.y - self.height
+#        adaptive_height: True
 
 #    MDLabel:
 #        text: 'twosd sldj  sdlj f'
@@ -111,11 +113,11 @@
 #        y: big_pic.y - self.height - one.height
 #        adaptive_height: True
 
-    MDLabel:
-        text: 'twsdfssd sdjf jsldj  sdj lsdjl s sdljf ddj k'
-#        size_hint: None , None
-#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
-        halign: 'center'
-        y: big_pic.y - self.height - one.height
-        adaptive_height: True
+#    MDLabel:
+#        text: 'twsdfssd sdjf jsldj  sdj lsdjl s sdljf ddj k'
+##        size_hint: None , None
+##        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+#        halign: 'center'
+#        y: big_pic.y - self.height - one.height
+#        adaptive_height: True
 

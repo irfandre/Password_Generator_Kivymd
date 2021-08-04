@@ -9,6 +9,10 @@ class IntroScreen(MDScreen):
         super(IntroScreen, self).__init__(**kw)
         self.app = MDApp.get_running_app()
 
+    def on_enter(self, *args):
+        print(self.ids.bu)
+        self.ids.bu.size_hint = 0.7, None
+
     def goto_gen(self):
         print("hello")
         print(self.app.sm)
