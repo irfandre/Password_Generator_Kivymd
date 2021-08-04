@@ -8,26 +8,28 @@ import string
 import re
 from kivy.core.clipboard import Clipboard
 from kivymd.toast import toast
+from kivymd.uix.screen import MDScreen
 from kivymd.uix.snackbar import Snackbar
 from kivy.uix.scrollview import ScrollView
 from kivymd.uix.bottomnavigation import MDBottomNavigationItem
 from kivy.properties import StringProperty
 from kivy.config import Config
 
-class GeneratorScreen(Screen):
+class GeneratorScreen(MDScreen):
     def __init__(self, **kw):
         super(GeneratorScreen, self).__init__(**kw)
         # Clock.schedule_once(self.after_init)
         self.app = MDApp.get_running_app()
 
     def on_kv_post(self, base_widget):
-        self.generate()
+        self.generate(2,3)
 
     def on_pre_enter(self, *args):
-        print("pre show", self.app.show)
+        # print("pre show", self.app.show)
+        pass
 
     def on_enter(self, *args):
-        print("pre show", self.app.show)
+        # print("pre show", self.app.show)
         read_config = configparser.ConfigParser()
         name = 0
         try:
@@ -46,7 +48,8 @@ class GeneratorScreen(Screen):
     # def o
 
     def check_config(self):
-        print(self.app.show)
+        # print(self.app.show)
+        pass
 
     def set_special(self):
         print('special executed')
@@ -56,7 +59,6 @@ class GeneratorScreen(Screen):
         slider = self.ids.input_value
         if slider.value < 8:
             slider.value = 8
-        print("hello", slider.value)
         self.generate()
 
     def on_tab_release(self, *args):
@@ -117,7 +119,8 @@ class GeneratorScreen(Screen):
                 colored_string += '[color=bc4b4b]' + i + '[/color]'
 
         print('Random string with', letters_count, 'letters', 'and', digits_count, 'digits and', special_count,
-              ' special charcters is: \n', final_string)
+              ' special charcters is: \n', final_string, "and total password length is: -- ",
+              int(self.ids.input_value.value))
         self.ids.result.text = colored_string
         return self.ids.result.text
 

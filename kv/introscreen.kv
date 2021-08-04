@@ -1,0 +1,121 @@
+#:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
+#:import get_hex_from_color kivy.utils.get_hex_from_color
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+<IntroScreen>:
+#    canvas:
+#        Color:
+#            rgba: 0, 0, 1, 1    # Blue
+#
+#        # size and position of Canvas
+#        Rectangle:
+##            pos: self.pos
+#            size: root.height
+#            y: dp(100)
+    Image:
+        id: big_pic
+        source: 'orange.png'
+        size_hint: None, None
+        size: root.width + dp(200), root.height + dp(50)
+        pos_hint: {'center_x': .5}
+        allow_stretch: True
+        keep_ratio: False
+        y: dp(200)
+
+
+    MDBoxLayout:
+        id: box
+        orientation: 'vertical'
+        adaptive_size: True
+        pos_hint: {'center_x':.5}
+        y: big_pic.y + self.height + dp(250)
+#        md_bg_color: 1,0.2,1,1
+        MDLabel:
+            id: title
+            text: 'Generator'
+            adaptive_size: True
+            opposite_colors: True
+#            color: get_color_from_hex('F49C8A')
+            color: (1,1,1,1)
+            font_style: 'H4'
+            bold: True
+            adaptive_height: True
+
+
+        MDLabel:
+            text: 'Tecnsec'
+            halign: 'right'
+            font_style: 'Button'
+            adaptive_height: True
+#            y: la.y + self.height
+#    Image:
+#        source: 'small.png'
+#        size_hint: None, None
+#        size: STANDARD_INCREMENT, STANDARD_INCREMENT
+#        x: box.x
+#        y: box.y + self.height
+    Image:
+        source: 'chemical.png'
+#        size_hint: None, None
+#        size: STANDARD_INCREMENT, STANDARD_INCREMENT
+#        x: big_pic.x
+        y: box.y - big_pic.y
+
+#    MDIconButton:
+#        icon: "android"
+#        theme_text_color: "Custom"
+#        text_color: app.theme_cls.primary_color
+
+    MDRaisedButton:
+        id: bu
+        text: "hello"
+        adaptive_height: True
+#        x: box.x
+        bold: True
+        md_bg_color: get_color_from_hex('F49C8A')
+        halign: 'center'
+        pos_hint: {'center_x':0.5}
+        y: box.y - big_pic.y - self.height
+        on_release: root.goto_gen()
+
+    MDLabel:
+        id: one
+        text: 'one'
+        size_hint: None, None
+#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+        x: box.x
+        y: bu.y - self.height
+        adaptive_height: True
+#        pos_hint: {'center_x':.5}
+    MDLabel:
+        id: two
+        text: 'two'
+        size_hint: None, None
+#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+        x: box.x
+        y: one.y -self.height
+        adaptive_height: True
+
+    MDLabel:
+        text: 'two'
+        size_hint: None, None
+#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+        x: box.x
+        y: two.y - self.height
+        adaptive_height: True
+
+#    MDLabel:
+#        text: 'twosd sldj  sdlj f'
+#        size_hint: None, None
+##        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+#        x: box.x
+#        y: big_pic.y - self.height - one.height
+#        adaptive_height: True
+
+    MDLabel:
+        text: 'twsdfssd sdjf jsldj  sdj lsdjl s sdljf ddj k'
+#        size_hint: None , None
+#        size: STANDARD_INCREMENT , STANDARD_INCREMENT
+        halign: 'center'
+        y: big_pic.y - self.height - one.height
+        adaptive_height: True
+

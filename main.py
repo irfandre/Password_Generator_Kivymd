@@ -1,14 +1,14 @@
 from kivy.clock import Clock
 from kivy.config import ConfigParser
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, SwapTransition, NoTransition
 from kivymd.app import MDApp
 from kivy.lang import Builder
 
 from kivymd.theming import ThemeManager
 from baseclass.generatorscreen import GeneratorScreen
+from baseclass.introscreen import IntroScreen
 from kivy.core.window import Window
 from settings_json import setting_json
-
 
 class GeneratorApp(MDApp):
     show = 0
@@ -34,14 +34,16 @@ class GeneratorApp(MDApp):
 
     def build(self):
         self.theme_cls = ThemeManager()
-        sm = ScreenManager()
-        sm.add_widget(GeneratorScreen(name='generator_screen'))
+        self.sm = ScreenManager(transition=NoTransition())
+        self.sm.add_widget(IntroScreen(name='intro_screen'))
+
+        self.sm.add_widget(GeneratorScreen(name='generator_screen'))
         self.theme_cls.primary_palette = "DeepPurple"
-        self.use_kivy_settings = False
+        # self.use_kivy_settings = False
         self.show = self.config.get('Example', 'bool')
         print("from build",self.show)
 
-        return sm
+        return self.sm
 
     def on_start(self):
         print("from start " , self.show)
@@ -69,6 +71,9 @@ class GeneratorApp(MDApp):
 
     def on_config_change(self, config, section, key, value):
         print(config, section, key, value)
+        if config.get('Example', 'bool') == '1':
+            self.sm.current = 'intro_screen'
+            self.close_settings()
 
 
 if __name__ == '__main__':
