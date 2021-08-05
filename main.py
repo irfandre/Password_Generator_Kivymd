@@ -53,7 +53,6 @@ class GeneratorApp(MDApp):
         print(self.screens_visited_list)
         self.config = self.config
 
-
     '''
     {27: 'escape', 9: 'tab', 8: 'backspace', 13: 'enter', 127: 'del', 271: 'enter', 273: 'up', 274: 'down',
      275: 'right', 276: 'left', 278: 'home', 279: 'end', 280: 'pgup', 281: 'pgdown'}#
@@ -71,9 +70,9 @@ class GeneratorApp(MDApp):
         if self.sm.current not in self.screens_visited_list:
             self.screens_visited_list.append(self.sm.current)
             print(self.screens_visited_list)
+
     def on_stop(self):
         pass
-
 
     def show_alert_dialog(self):
         if not self.dialog:
@@ -89,6 +88,7 @@ class GeneratorApp(MDApp):
                 ],
             )
         self.dialog.open()
+
     def pop_screen(self):
         if self.screens_visited_list:
             if not self.sm.current == "intro_screen":

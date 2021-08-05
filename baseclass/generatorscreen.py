@@ -43,6 +43,10 @@ class GeneratorScreen(MDScreen):
                 self.ids.special_switch.active = True
             elif self.app.config.get("options", "special") == '0':
                 self.ids.special_switch.active = False
+        else:
+            self.ids.digits_switch.active = False
+            self.ids.special_switch.active = False
+
 
     def set_digits_config(self):
         if self.ids.digits_switch.active:
