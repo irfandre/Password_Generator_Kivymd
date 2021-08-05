@@ -44,9 +44,11 @@ class GeneratorScreen(MDScreen):
             elif self.app.config.get("options", "special") == '0':
                 self.ids.special_switch.active = False
         else:
-            self.ids.digits_switch.active = False
-            self.ids.special_switch.active = False
-
+            # self.ids.digits_switch.active = False
+            # self.ids.special_switch.active = False
+            self.app.config.set("options", 'digits', '0')
+            self.app.config.set("options", 'digits', '0')
+            self.app.config.write()
 
     def set_digits_config(self):
         if self.ids.digits_switch.active:
