@@ -1,39 +1,52 @@
-#:import Clipboard kivy.core.clipboard.Clipboard
-
+##:import Clipboard kivy.core.clipboard.Clipboard
+##:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
 <GeneratorScreen>:
-    do_default_tab: True
-    BoxLayout:
+    MDBoxLayout:
         orientation: 'vertical'
         MDToolbar:
             title: 'Generator'
             right_action_items: [["dots-vertical", lambda x: app.open_settings() ]]
 
         MDFloatLayout:
-            radius: [25, 0, 0, 0]
             orientation: 'vertical'
+            MDLabel:
+                id: result
+                pos_hint: {"center_x":0.5, "center_y":0.89}
+#                size_hint: 0.65, None     # <<<<<<<<<<
+#                height: self.texture_size[1]   # <<<<<<<<<<
+#                size: root.width - dp(50), dp(1)
+#                scroll_y: True
+#                do_scroll_y: True
+                text_size: root.width, None
+                text: " "
+                markup: True
+                halign: "center"
+                adaptive_size: True
+#                font_style: "H6"
+                padding: 10,1
+                allow_copy: True
 
             MDLabel:
                 pos_hint: {"center_x": 0.21, "center_y": 0.7}
                 size_hint: (.8, .1)
                 text: str(int(input_value.value))
                 halign: "center"
-                font_style: "H6"
+#                font_style: "H7"
                 theme_text_color: "Primary"
+                adaptive_height: True
                 id: one
 
             MDSlider:
                 min: 0
                 max: 128
-                value: 8
+                value: 128
                 id: input_value
+#                value_track_color: [1,0.2,1,1]
                 pos_hint: {"center_x": 0.6, "center_y": 0.7}
                 size_hint: .5, None
                 hint: False
-
                 color: app.theme_cls.primary_color
                 on_value: root.value_check()
-
-
 
             MDLabel:
                 text: "Special"
@@ -43,46 +56,37 @@
             MDSwitch:
                 id: special_switch
                 pos_hint: {"center_x": 0.8, "center_y":0.5}
-                on_active: root.generate(2,3)
-
-
+                on_active:
+                    root.set_special_config()
+                    root.generate()
             MDLabel:
-                text: "DIgits"
+                text: "Digits"
                 pos_hint: {"center_x": 0.7, "center_y":0.6}
                 theme_text_color: "Primary"
+
             MDSwitch:
                 id: digits_switch
                 pos_hint: {"center_x": 0.8, "center_y":0.6}
-                on_active: root.generate(2,3)
-
-            MDLabel:
-                id: result
-    #            pos_hint: {"x": .5, "top": .33}
-                pos_hint: {"center_x":0.5, "center_y":0.85}
-                size_hint: 0.65, None     # <<<<<<<<<<
-                height: self.texture_size[1]   # <<<<<<<<<<
-    #            scroll_y: True
-    #            do_scroll_y: True
-                text_size: self.width, None
-                text: " "
-                markup: True
-                halign: "center"
-    #            halign:"left"
-                valign:"middle"
-                allow_copy: True
-                theme_text_color: "Primary"
+                on_active:
+                    root.set_digits_config()
+                    root.generate()
 
             MDRaisedButton:
+                id: regen_button
                 text: "Regenerate Password"
-                pos_hint: {"center_x": 0.5, "center_y":0.2}
-    #            size_hint: .7,None
-                on_press: root.generate(2,3)
+                pos_hint: {"center_x": 0.5, "center_y":0.18}
+#                size_hint: .7,None
+                on_press: root.generate()
+                adaptive_size: True
+
 
             MDRaisedButton:
+                id: copy_button
                 text: "Copy Password"
                 pos_hint: {"center_x": 0.5, "center_y":0.1}
-    #            size_hint: .7,None
+#                size_hint: .7,None
                 on_release: root.clean_text()
+                adaptive_size: True
             MDLabel
 
 

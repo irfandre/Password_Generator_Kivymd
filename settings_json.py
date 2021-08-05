@@ -8,10 +8,26 @@ setting_json = json.dumps([
             },
             {
                 'type' : 'bool',
-                'title': 'Save Settings',
-                'desc': 'Save the selection of characters',
+                'title': 'Goto Intro',
+                'desc': 'Go back to intro screen',
                 'section': 'Example',
                 'key': 'bool'
+
+            },
+            {
+                'type' : 'bool',
+                'title': 'Dark Mode',
+                'desc': 'Enable/Disable Dark Mode',
+                'section': 'Example',
+                'key': 'darkmode'
+
+            },
+            {
+                'type': 'bool',
+                'title': 'Save Options',
+                'desc': 'Save Selected Character options',
+                'section': 'Example',
+                'key': 'saveoptions'
 
             },
             # {
