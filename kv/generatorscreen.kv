@@ -41,6 +41,7 @@
                 max: 128
                 value: 128
                 id: input_value
+#                value_track_color: [1,0.2,1,1]
                 pos_hint: {"center_x": 0.6, "center_y": 0.7}
                 size_hint: .5, None
                 hint: False
@@ -55,8 +56,9 @@
             MDSwitch:
                 id: special_switch
                 pos_hint: {"center_x": 0.8, "center_y":0.5}
-                on_active: root.generate()
-
+                on_active:
+                    root.set_special_config()
+                    root.generate()
             MDLabel:
                 text: "DIgits"
                 pos_hint: {"center_x": 0.7, "center_y":0.6}
@@ -65,9 +67,12 @@
             MDSwitch:
                 id: digits_switch
                 pos_hint: {"center_x": 0.8, "center_y":0.6}
-                on_active: root.generate()
+                on_active:
+                    root.set_digits_config()
+                    root.generate()
 
             MDRaisedButton:
+                id: regen_button
                 text: "Regenerate Password"
                 pos_hint: {"center_x": 0.5, "center_y":0.18}
 #                size_hint: .7,None
@@ -76,6 +81,7 @@
 
 
             MDRaisedButton:
+                id: copy_button
                 text: "Copy Password"
                 pos_hint: {"center_x": 0.5, "center_y":0.1}
 #                size_hint: .7,None
