@@ -1,10 +1,13 @@
-##:import Clipboard kivy.core.clipboard.Clipboard
-##:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
+
+#:import Clipboard kivy.core.clipboard.Clipboard
+#:import STANDARD_INCREMENT kivymd.material_resources.STANDARD_INCREMENT
+#:import get_hex_from_color kivy.utils.get_hex_from_color
+#:import get_color_from_hex kivy.utils.get_color_from_hex
 <GeneratorScreen>:
     MDBoxLayout:
         orientation: 'vertical'
         MDToolbar:
-            title: 'Generator'
+            title: '[color=#ffffff]Generator[/color]'
             right_action_items: [["dots-vertical", lambda x: app.open_settings() ]]
 
         MDFloatLayout:
@@ -73,16 +76,19 @@
 
             MDRaisedButton:
                 id: regen_button
-                text: "Regenerate Password"
+                text: "[color=#ffffff]Regenerate Password[/color]"
                 pos_hint: {"center_x": 0.5, "center_y":0.18}
 #                size_hint: .7,None
+#                text_color: 0, 0, 1, 1
+#                md_bg_color: get_color_from_hex('F49C8A')
+#                bg_hint_color: 1,1,0,1
                 on_press: root.generate()
                 adaptive_size: True
 
 
             MDRaisedButton:
                 id: copy_button
-                text: "Copy Password"
+                text: "[color=#ffffff]Copy Password[/color]"
                 pos_hint: {"center_x": 0.5, "center_y":0.1}
 #                size_hint: .7,None
                 on_release: root.clean_text()

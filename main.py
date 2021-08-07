@@ -1,4 +1,4 @@
-from kivy.uix.screenmanager import ScreenManager, NoTransition
+from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivymd.app import MDApp
 from kivy.lang import Builder
 
@@ -12,53 +12,48 @@ from kivy.core.window import Window
 from settings_json import setting_json
 
 
+class ScreenManager(ScreenManager):
+    pass
+
+
 class GeneratorApp(MDApp):
     show = 0
     dialog = None
 
     def __init__(self, **kwargs):
-        super(GeneratorApp, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         self.screens_visited_list = []
-        self.rootscreen = Builder.load_file("main.kv")
+        self.theme_cls.primary_palette = "Red"
+        self.theme_cls.primary_hue = "A100"
+        self.screen = Builder.load_file("main.kv")
         Window.bind(on_keyboard=self.on_back_button)
         self.title = "Password Generator"
 
-        self.theme_cls.primary_palette = "DeepPurple"
-        self.theme_cls.primary_hue = "500"
-
-        self.theme_cls.accent_palette = "DeepOrange"
-        self.theme_cls.accent_hue = "500"
-
-        self.theme_cls.theme_style = "Light"
-        self.setting = 'self.config'
-        self.sm = ScreenManager(transition=NoTransition())
-
     def build(self):
-        self.theme_cls = ThemeManager()
-        self.sm.add_widget(IntroScreen(name='intro_screen'))
-        self.sm.add_widget(GeneratorScreen(name='generator_screen'))
-        self.theme_cls.primary_palette = "DeepPurple"
         self.use_kivy_settings = False
         self.show = self.config.get('Example', 'bool')
-        print("from build", self.show)
-        return self.sm
+        return self.screen
 
     def on_start(self):
         print("from start ", self.show)
         self.toggle_intro_screen(self.config.get('Example', 'bool'))
         self.toggle_darkmode(self.config.get('Example', 'darkmode'))
-        print(self.sm.__dict__)
-        print(self.sm.screen_names)
         self.check_visited_screens()
         print(self.screens_visited_list)
-        self.config = self.config
+        print("root", self.screen.ids.intro_screen.ids)
+        print("root", self.screen.ids)
+
+    def goto_gen(self):
+        print('grom go')
+        print('self.screen.current ')
+        self.screen.current = 'generator_screen'
 
     '''
     {27: 'escape', 9: 'tab', 8: 'backspace', 13: 'enter', 127: 'del', 271: 'enter', 273: 'up', 274: 'down',
      275: 'right', 276: 'left', 278: 'home', 279: 'end', 280: 'pgup', 281: 'pgdown'}#
     '''
     def on_back_button(self, window, key, *args):
-        # print("Keyboard button pressed", window.__dict__)
+        print("Keyboard button pressed", key)
         if key == 27:
             # return self.close_settings()
             return self.pop_screen()
@@ -67,42 +62,24 @@ class GeneratorApp(MDApp):
 
     def check_visited_screens(self):
         # print(self.screens_visited_list)
-        if self.sm.current not in self.screens_visited_list:
-            self.screens_visited_list.append(self.sm.current)
+        if self.screen.current not in self.screens_visited_list:
+            self.screens_visited_list.append(self.screen.current)
             print(self.screens_visited_list)
-
-    def on_stop(self):
-        pass
-
-    def show_alert_dialog(self):
-        if not self.dialog:
-            self.dialog = MDDialog(
-                text="Discard draft?",
-                buttons=[
-                    MDFlatButton(
-                        text="CANCEL", text_color=self.theme_cls.primary_color
-                    ),
-                    MDFlatButton(
-                        text="DISCARD", text_color=self.theme_cls.primary_color
-                    ),
-                ],
-            )
-        self.dialog.open()
 
     def pop_screen(self):
         if self.screens_visited_list:
-            if not self.sm.current == "intro_screen":
+            if not self.screen.current == "intro_screen":
                 popped_item = self.screens_visited_list.pop()
-                # self.sm.current = popped_item
-                print("popping",popped_item)
+                # self.screen.current = popped_item
+                print("popping", popped_item)
                 if len(self.screens_visited_list) == 0:
                     return self.stop()
-                self.sm.current = self.screens_visited_list[len(self.screens_visited_list)-1]
+                self.screen.current = self.screens_visited_list[len(self.screens_visited_list) - 1]
                 print(self.screens_visited_list)
                 return True
         else:
-            self.sm.current = "intro_screen"
-            self.screens_visited_list.append(self.sm.current)
+            self.screen.current = "intro_screen"
+            self.screens_visited_list.append(self.screen.current)
             # return True
 
     def build_settings(self, settings):
@@ -134,10 +111,10 @@ class GeneratorApp(MDApp):
 
     def toggle_intro_screen(self, value):
         if value == '1':
-            self.sm.current = 'intro_screen'
+            self.screen.current = 'intro_screen'
             self.close_settings()
         else:
-            self.sm.current = 'intro_screen'
+            self.screen.current = 'intro_screen'
             self.close_settings()
 
     def toggle_darkmode(self, value):
