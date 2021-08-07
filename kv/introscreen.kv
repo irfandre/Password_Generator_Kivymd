@@ -54,6 +54,7 @@
 #        x: box.x
 #        y: box.y + self.height
     Image:
+        id: grid
         source: 'data/chemical.png'
 #        size_hint: None, None
 #        size: STANDARD_INCREMENT, STANDARD_INCREMENT
@@ -66,22 +67,50 @@
 #        text_color: app.theme_cls.primary_color
 
     MDRaisedButton:
-        id: bu
-        text: "Start"
+        id: start_button
+        text: "[color=#ffffff]Start[/color]"
         adaptive_height: True
 #        x: box.x
         bold: True
-        md_bg_color: get_color_from_hex('F49C8A')
+#        md_bg_color: get_color_from_hex('F49C8A')
+#        md_bg_color: rgba(253, 0, 253,255)
+#        color: 1,1,1,1
+#        text_color: 1, 1, 1, 1
         halign: 'center'
         pos_hint: {'center_x':0.5}
+#        md_bg_color: get_color_from_hex('F49C8A')
+#        md_bg_color: app.theme_cls.primary_light
+
+#        text_color : rgba(253, 0, 253,255)
 #        size;
 #        size_hint: 0.7,None
         y: big_pic.y -  self.height
-        on_release: root.goto_gen()
+        on_release: root.parent.current = 'generator_screen'
+        bg_hint_color: app.theme_cls.primary_light
 
-#    MDLabel:
-#        id: one
-#        text: 'one'
+    MDLabel:
+        id: hi_text
+        text: "HI!"
+        halign: 'center'
+        adaptive_size: True
+        pos_hint: {'center_x':0.5}
+        color: app.theme_cls.primary_color if app.theme_cls.theme_style=='Light' else [1,1,1,1]
+        font_style: 'H5'
+#        y: big_pic.y - box.y
+        y: start_button.y + dp(65)
+    MDLabel:
+#        id:
+        text: "Welcome to the password generator app"
+        halign: 'center'
+        adaptive_size: True
+        pos_hint: {'center_x':0.5}
+        color: app.theme_cls.disabled_hint_text_color if app.theme_cls.theme_style=='Light' else [1,1,1,1]
+#        on_color: app.the_cls.disabled_hint_text_color
+        font_style: 'Subtitle2'
+#        y: big_pic.y - box.y
+        y: hi_text.y - self.height
+#        y: self.height - dp(200)
+
 #        size_hint: None, None
 ##        size: STANDARD_INCREMENT , STANDARD_INCREMENT
 #        x: box.x

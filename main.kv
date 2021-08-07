@@ -1,9 +1,14 @@
 #:include kv/generatorscreen.kv
 #:include kv/introscreen.kv
-BoxLayout:
-    orientation: 'vertical'
-#    MDToolbar:
-#        title: 'Generator'
-#        right_action_items: [["dots-vertical", lambda x: app.open_settings() ]]
-    GeneratorScreen:
+#:import NoTransition  kivy.uix.screenmanager.NoTransition
+ScreenManager:
+    id: screen_manager
+    transition: NoTransition()
     IntroScreen:
+        id: intro_screen
+        name: 'intro_screen'
+        manager: 'screen_manager'
+    GeneratorScreen:
+        id: generator_screen
+        name: 'generator_screen'
+        manager: 'screen_manager'
