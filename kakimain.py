@@ -1,8 +1,10 @@
 from kaki.app import App
 from kivy import Config
 from kivy.clock import Clock
+
 from kivy.core.window import Window
 from kivy.factory import Factory
+from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, WipeTransition, SwapTransition, CardTransition, FadeTransition, \
     FallOutTransition, RiseInTransition, NoTransition
 from kivymd.app import MDApp
@@ -11,14 +13,16 @@ import os
 from baseclass.generatorscreen import GeneratorScreen
 from baseclass.introscreen import IntroScreen
 from settings_json import setting_json
+
 Config.set('graphics', 'position', 'custom')
 Window.size = (300, 700)
+
 
 class LiveApp(App, MDApp):
     KV_FILES = {
         os.path.join(os.getcwd(), "kv/generatorscreen.kv"),
-        # os.path.join(os.getcwd(), "main.kv"),
         os.path.join(os.getcwd(), "kv/introscreen.kv"),
+        os.path.join(os.getcwd(), "main.kv"),
     }
 
     CLASSES = {
@@ -36,20 +40,22 @@ class LiveApp(App, MDApp):
         self.screens_visited_list = []
         self.theme_cls.primary_palette = "DeepPurple"
         self.use_kivy_settings = False
-        self.sm = ScreenManager(transition=NoTransition())
-        self.sm.add_widget(IntroScreen(name='intro_screen'))
-        self.sm.add_widget(GeneratorScreen(name='generator_screen'))
-        # return Factory.GeneratorScreen()
-        return self.sm
+        self.screen = ScreenManager(transition=NoTransition())
+        self.screen.add_widget(IntroScreen(name='intro_screen'))
+        self.screen.add_widget(GeneratorScreen(name='generator_screen'))
+        return Factory.GeneratorScreen()
+        # self.screen = Builder.load_file('main.kv')
+        # return self.screen
         # return Factory.ScreenUI()
 
     def on_start(self):
-        # print(self.sm.current)
+        # print(se.current)
         self.check_visited_screens()
-        # Clock.schedule_once(self.gen_scren, 1000)
+        Clock.schedule_once(self.gen_scren, 1000)
+
     # def on
     def gen_scren(self):
-        self.sm.current = 'generator_screen'
+        self.screen.current = 'generator_screen'
 
     def _rebuild(self, *args):
         if args[1] == 32:
@@ -61,7 +67,7 @@ class LiveApp(App, MDApp):
         '''
 
     def on_back_button(self, window, key, *args):
-        # print("Keyboard button pressed", window.__dict__)
+        print("Keyboard button pressed", window, key, args)
         if key == 27:
             # return self.close_settings()
             return self.pop_screen()
@@ -70,24 +76,24 @@ class LiveApp(App, MDApp):
 
     def check_visited_screens(self):
         # print(self.screens_visited_list)
-        if self.sm.current not in self.screens_visited_list:
-            self.screens_visited_list.append(self.sm.current)
+        if self.screen.current not in self.screens_visited_list:
+            self.screens_visited_list.append(self.screen.current)
             print(self.screens_visited_list)
 
     def pop_screen(self):
         if self.screens_visited_list:
-            if not self.sm.current == "intro_screen":
+            if not self.screen.current == "intro_screen":
                 popped_item = self.screens_visited_list.pop()
-                # self.sm.current = popped_item
+                # self.screen.current = popped_item
                 print("popping", popped_item)
                 if len(self.screens_visited_list) == 0:
                     return self.stop()
-                self.sm.current = self.screens_visited_list[len(self.screens_visited_list) - 1]
+                self.screen.current = self.screens_visited_list[len(self.screens_visited_list) - 1]
                 print(self.screens_visited_list)
                 return True
         else:
-            self.sm.current = "intro_screen"
-            self.screens_visited_list.append(self.sm.current)
+            self.screen.current = "intro_screen"
+            self.screens_visited_list.append(self.screen.current)
             # return True
 
     def build_settings(self, settings):
@@ -118,10 +124,10 @@ class LiveApp(App, MDApp):
 
     def toggle_intro_screen(self, value):
         if value == '1':
-            self.sm.current = 'intro_screen'
+            self.screen.current = 'intro_screen'
             self.close_settings()
         else:
-            self.sm.current = 'intro_screen'
+            self.screen.current = 'intro_screen'
             self.close_settings()
 
     def toggle_darkmode(self, value):

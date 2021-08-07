@@ -50,7 +50,7 @@ requirements = python3,kivy==2.0.0,https://github.com/kivymd/KivyMD/archive/mast
 presplash.filename = %(source.dir)s/data/intro.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/intro.png
+icon.filename = %(source.dir)s/data/icon96x96.png
 # (str) Icon of the application
 #icon.filename = %(source.dir)s/data/icon.png
 
