@@ -149,8 +149,8 @@ class GeneratorApp(MDApp):
             exit_button.bind(on_release=self.stop)
             cancel_button.bind(on_release=self.dialog_close)
             self.dialog = MDDialog(
-                text="Discard draft?",
-                title="Reset settings?",
+                title="Exit",
+                text="Are you sure you want to exit?",
                 buttons=[
                     cancel_button,
                     exit_button,
@@ -160,7 +160,7 @@ class GeneratorApp(MDApp):
         return True
 
     def dialog_close(self, *args):
-        print('closing dialog ')
+        print('closing dialog')
         self.dialog.dismiss(force=True)
 
 if __name__ == '__main__':
