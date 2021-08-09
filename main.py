@@ -144,7 +144,7 @@ class GeneratorApp(MDApp):
                 text="Exit", text_color=self.theme_cls.primary_color
             )
             cancel_button = MDFlatButton(
-                        text="CANCEL", text_color=self.theme_cls.primary_color
+                        text="Cancel", text_color=self.theme_cls.primary_color
                     )
             exit_button.bind(on_release=self.stop)
             cancel_button.bind(on_release=self.dialog_close)
