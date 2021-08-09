@@ -1,8 +1,6 @@
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivymd.app import MDApp
 from kivy.lang import Builder
-
-from kivymd.theming import ThemeManager
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 
@@ -21,13 +19,14 @@ class GeneratorApp(MDApp):
     dialog = None
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(GeneratorApp, self).__init__(**kwargs)
         self.screens_visited_list = []
         self.theme_cls.primary_palette = "Red"
         self.theme_cls.primary_hue = "A100"
         self.screen = Builder.load_file("main.kv")
-        Window.bind(on_keyboard=self.on_back_button)
         self.title = "Password Generator"
+        Window.bind(on_keyboard=self.on_back_button)
+        Window.bind(on_request_close=self.show_alert_dialog)
 
     def build(self):
         self.use_kivy_settings = False
@@ -42,11 +41,6 @@ class GeneratorApp(MDApp):
         print(self.screens_visited_list)
         print("root", self.screen.ids.intro_screen.ids)
         print("root", self.screen.ids)
-
-    def goto_gen(self):
-        print('grom go')
-        print('self.screen.current ')
-        self.screen.current = 'generator_screen'
 
     '''
     {27: 'escape', 9: 'tab', 8: 'backspace', 13: 'enter', 127: 'del', 271: 'enter', 273: 'up', 274: 'down',
@@ -106,8 +100,29 @@ class GeneratorApp(MDApp):
             self.toggle_darkmode(value)
         elif key == 'bool':
             self.toggle_intro_screen(value)
-        elif key == 'saveoptions':
-            pass
+        elif key == 'saveoptions' and value == '1':
+            self.set_digits_config(config)
+            self.set_special_config(config)
+        elif key == 'saveoptions' and value == '0':
+            config.set("options", 'digits', '0')
+            config.set("options", 'special', '0')
+            config.write()
+
+    def set_digits_config(self, config):
+        if self.screen.ids.generator_screen.ids.digits_switch.active:
+            config.set("options", 'digits', '1')
+            config.write()
+        else:
+            config.set("options", 'digits', '0')
+            config.write()
+
+    def set_special_config(self, config):
+        if self.screen.ids.generator_screen.ids.special_switch.active:
+            config.set("options", 'special', '1')
+            config.write()
+        else:
+            config.set("options", 'special', '0')
+            config.write()
 
     def toggle_intro_screen(self, value):
         if value == '1':
@@ -123,6 +138,30 @@ class GeneratorApp(MDApp):
         else:
             self.theme_cls.theme_style = "Light"
 
+    def show_alert_dialog(self, *largs, **kwargs):
+        if not self.dialog:
+            exit_button = MDFlatButton(
+                text="Exit", text_color=self.theme_cls.primary_color
+            )
+            cancel_button = MDFlatButton(
+                        text="CANCEL", text_color=self.theme_cls.primary_color
+                    )
+            exit_button.bind(on_release=self.stop)
+            cancel_button.bind(on_release=self.dialog_close)
+            self.dialog = MDDialog(
+                text="Discard draft?",
+                title="Reset settings?",
+                buttons=[
+                    cancel_button,
+                    exit_button,
+                ],
+            )
+        self.dialog.open()
+        return True
+
+    def dialog_close(self, *args):
+        print('closing dialog ')
+        self.dialog.dismiss(force=True)
 
 if __name__ == '__main__':
     GeneratorApp().run()

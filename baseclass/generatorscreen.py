@@ -24,14 +24,6 @@ class GeneratorScreen(MDScreen):
         self.configuration_check()
         self.app.check_visited_screens()
 
-        # try:
-        #     read_config.read("generator.ini")
-        #     name = read_config.get("Example", "bool")
-        # except configparser.NoOptionError:
-        #     pass
-        # except configparser.NoSectionError:
-        #     pass
-
     def configuration_check(self):
         if self.app.config.get("Example", "saveoptions") == '1':
             if self.app.config.get("options", "digits") == '1':
@@ -47,7 +39,7 @@ class GeneratorScreen(MDScreen):
             # self.ids.digits_switch.active = False
             # self.ids.special_switch.active = False
             self.app.config.set("options", 'digits', '0')
-            self.app.config.set("options", 'digits', '0')
+            self.app.config.set("options", 'special', '0')
             self.app.config.write()
 
     def set_digits_config(self):
@@ -59,7 +51,7 @@ class GeneratorScreen(MDScreen):
             self.app.config.write()
 
     def set_special_config(self):
-        if self.ids.digits_switch.active:
+        if self.ids.special_switch.active:
             self.app.config.set("options", 'special', '1')
             self.app.config.write()
         else:
@@ -131,7 +123,7 @@ class GeneratorScreen(MDScreen):
         self.ids.result.text = colored_string
         return self.ids.result.text
 
-    def clean_text(self):
+    def cleaned_text(self):
         text_after = re.sub(r'\[(.*?)\]', '', self.ids.result.text)
         Clipboard.copy(text_after)
         toast('Password Copied')
