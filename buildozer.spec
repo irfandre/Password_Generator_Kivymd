@@ -36,7 +36,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==2.0.0,https://github.com/kivymd/KivyMD/archive/master.zip,sdl2_ttf==2.0.15,pillow
+requirements = kivy==2.0.0,https://github.com/kivymd/KivyMD/archive/master.zip,sdl2_ttf==2.0.15,pillow
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
@@ -50,7 +50,7 @@ requirements = python3,kivy==2.0.0,https://github.com/kivymd/KivyMD/archive/mast
 presplash.filename = %(source.dir)s/data/intro.png
 
 # (str) Icon of the application
-icon.filename = %(source.dir)s/data/icon96x96.png
+icon.filename = %(source.dir)s/data/icon200x143.png
 # (str) Icon of the application
 #icon.filename = %(source.dir)s/data/icon.png
 

@@ -42,22 +42,6 @@ class GeneratorScreen(MDScreen):
             self.app.config.set("options", 'special', '0')
             self.app.config.write()
 
-    def set_digits_config(self):
-        if self.ids.digits_switch.active:
-            self.app.config.set("options", 'digits', '1')
-            self.app.config.write()
-        else:
-            self.app.config.set("options", 'digits', '0')
-            self.app.config.write()
-
-    def set_special_config(self):
-        if self.ids.special_switch.active:
-            self.app.config.set("options", 'special', '1')
-            self.app.config.write()
-        else:
-            self.app.config.set("options", 'special', '0')
-            self.app.config.write()
-
     def value_check(self):
         slider = self.ids.input_value
         if slider.value < 8:

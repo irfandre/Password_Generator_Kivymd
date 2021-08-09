@@ -60,7 +60,7 @@
                 id: special_switch
                 pos_hint: {"center_x": 0.8, "center_y":0.5}
                 on_active:
-                    root.set_special_config()
+                    app.set_special_config()
                     root.generate()
             MDLabel:
                 text: "Digits"
@@ -71,7 +71,7 @@
                 id: digits_switch
                 pos_hint: {"center_x": 0.8, "center_y":0.6}
                 on_active:
-                    root.set_digits_config()
+                    app.set_digits_config()
                     root.generate()
 
             MDRaisedButton:

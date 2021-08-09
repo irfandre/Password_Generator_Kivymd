@@ -101,28 +101,28 @@ class GeneratorApp(MDApp):
         elif key == 'bool':
             self.toggle_intro_screen(value)
         elif key == 'saveoptions' and value == '1':
-            self.set_digits_config(config)
-            self.set_special_config(config)
+            self.set_digits_config()
+            self.set_special_config()
         elif key == 'saveoptions' and value == '0':
             config.set("options", 'digits', '0')
             config.set("options", 'special', '0')
             config.write()
 
-    def set_digits_config(self, config):
+    def set_digits_config(self):
         if self.screen.ids.generator_screen.ids.digits_switch.active:
-            config.set("options", 'digits', '1')
-            config.write()
+            self.config.set("options", 'digits', '1')
+            self.config.write()
         else:
-            config.set("options", 'digits', '0')
-            config.write()
+            self.config.set("options", 'digits', '0')
+            self.config.write()
 
-    def set_special_config(self, config):
+    def set_special_config(self):
         if self.screen.ids.generator_screen.ids.special_switch.active:
-            config.set("options", 'special', '1')
-            config.write()
+            self.config.set("options", 'special', '1')
+            self.config.write()
         else:
-            config.set("options", 'special', '0')
-            config.write()
+            self.config.set("options", 'special', '0')
+            self.config.write()
 
     def toggle_intro_screen(self, value):
         if value == '1':
