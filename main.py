@@ -8,8 +8,16 @@ from baseclass.generatorscreen import GeneratorScreen
 from baseclass.introscreen import IntroScreen
 from kivy.core.window import Window
 from settings_json import setting_json
-from kivy.utils import platform
+from kivy.utils import platform, get_color_from_hex
 
+
+## COMMENT OUT THE FOLLOWING DURING DEVELOPMENT / AND UNCOMMENT WHILE BUILDING
+# from android.runnable import run_on_ui_thread
+# from jnius import autoclass
+# Color = autoclass("android.graphics.Color")
+# WindowManager = autoclass('android.view.WindowManager$LayoutParams')
+# activity = autoclass('org.kivy.android.PythonActivity').mActivity
+## END COMMENT
 
 class ScreenManager(ScreenManager):
     pass
@@ -23,6 +31,7 @@ if platform != 'android':
 class GeneratorApp(MDApp):
     show = 0
     dialog = None
+    label = get_color_from_hex('2F3259')
 
     def __init__(self, **kwargs):
         super(GeneratorApp, self).__init__(**kwargs)
@@ -33,6 +42,15 @@ class GeneratorApp(MDApp):
         self.title = "Password Generator"
         Window.bind(on_keyboard=self.on_back_button)
         Window.bind(on_request_close=self.show_alert_dialog)
+
+    #COMMENT OUT THIS FUNCTION DURING DEVELOPMENT / AND UNCOMMENT WHILE BUILDING
+    # @run_on_ui_thread
+    # def statusbar(self, color):
+    #     window = activity.getWindow()
+    #     window.clearFlags(WindowManager.FLAG_TRANSLUCENT_STATUS)
+    #     window.addFlags(WindowManager.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    #     window.setStatusBarColor(Color.parseColor(color))
+    #     window.setNavigationBarColor(Color.parseColor(color))
 
     def build(self):
         self.use_kivy_settings = False

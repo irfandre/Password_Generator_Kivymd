@@ -89,6 +89,7 @@
         y: big_pic.y -  self.height
 #        on_release: root.parent.current = 'generator_screen'
         on_release: app.screen.current = 'generator_screen'
+#        on_press: root.one(get_hex_from_color(app.theme_cls.primary_light))
         bg_hint_color: app.theme_cls.primary_light
 
     MDLabel:
@@ -102,14 +103,14 @@
 #        y: big_pic.y - box.y
         y: start_button.y + dp(65)
     MDLabel:
-#        id:
+        id: desc
         text: "Welcome to the password generator app"
         halign: 'center'
         adaptive_size: True
         pos_hint: {'center_x':0.5}
 #        color: app.theme_cls.disabled_hint_text_color if app.theme_cls.theme_style=='Light' else [1,1,1,1]
 #        on_color: app.the_cls.disabled_hint_text_color
-        color: get_color_from_hex('313356')
+        color: get_color_from_hex('2F3259') # MIDNIGHT BLUE
         font_style: 'Subtitle2'
 #        y: big_pic.y - box.y
         y: hi_text.y - self.height

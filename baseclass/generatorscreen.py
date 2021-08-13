@@ -6,7 +6,6 @@ from kivy.core.clipboard import Clipboard
 from kivymd.toast import toast
 from kivymd.uix.screen import MDScreen
 
-
 class GeneratorScreen(MDScreen):
     def __init__(self, **kw):
         super(GeneratorScreen, self).__init__(**kw)
@@ -23,6 +22,8 @@ class GeneratorScreen(MDScreen):
     def on_enter(self, *args):
         self.configuration_check()
         self.app.check_visited_screens()
+        # COMMENT OUT BELOW LINE DURING DEVELOPMENT/ AND UNCOMMENT WHILE BUILDING
+        # self.app.statusbar('#e67a70')
 
     def configuration_check(self):
         if self.app.config.get("Example", "saveoptions") == '1':

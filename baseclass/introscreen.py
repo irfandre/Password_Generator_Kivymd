@@ -12,3 +12,9 @@ class IntroScreen(MDScreen):
         print("ids ---------", self.ids)
         self.ids.start_button.size_hint = 0.7, None
         # print(self.parent.current)
+        # print(self.parent.ids.generator_screen.generate(2,3))
+
+    def on_enter(self, *args):
+        print("intro screen entered")
+        # COMMENT OUT BELOW LINE DURING DEVELOPMENT/ AND UNCOMMENT WHILE BUILDING
+        # self.app.statusbar('#F59C8A')
