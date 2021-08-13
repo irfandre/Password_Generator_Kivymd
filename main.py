@@ -1,4 +1,4 @@
-from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
+from kivy.uix.screenmanager import ScreenManager
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivymd.uix.button import MDFlatButton
@@ -8,10 +8,16 @@ from baseclass.generatorscreen import GeneratorScreen
 from baseclass.introscreen import IntroScreen
 from kivy.core.window import Window
 from settings_json import setting_json
+from kivy.utils import platform
 
 
 class ScreenManager(ScreenManager):
     pass
+
+
+# if platform in ('linux', 'linux2', 'macos', 'win'):
+if platform != 'android':
+    Window.size = (350, 760)
 
 
 class GeneratorApp(MDApp):
@@ -46,6 +52,7 @@ class GeneratorApp(MDApp):
     {27: 'escape', 9: 'tab', 8: 'backspace', 13: 'enter', 127: 'del', 271: 'enter', 273: 'up', 274: 'down',
      275: 'right', 276: 'left', 278: 'home', 279: 'end', 280: 'pgup', 281: 'pgdown'}#
     '''
+
     def on_back_button(self, window, key, *args):
         print("Keyboard button pressed", key)
         if key == 27:
@@ -144,8 +151,8 @@ class GeneratorApp(MDApp):
                 text="Exit", text_color=self.theme_cls.primary_color
             )
             cancel_button = MDFlatButton(
-                        text="Cancel", text_color=self.theme_cls.primary_color
-                    )
+                text="Cancel", text_color=self.theme_cls.primary_color
+            )
             exit_button.bind(on_release=self.stop)
             cancel_button.bind(on_release=self.dialog_close)
             self.dialog = MDDialog(
@@ -162,6 +169,7 @@ class GeneratorApp(MDApp):
     def dialog_close(self, *args):
         print('closing dialog')
         self.dialog.dismiss(force=True)
+
 
 if __name__ == '__main__':
     GeneratorApp().run()

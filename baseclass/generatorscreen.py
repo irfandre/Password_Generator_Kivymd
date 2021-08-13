@@ -71,7 +71,7 @@ class GeneratorScreen(MDScreen):
             my_list[1] = 18 if special_divide > 18 else special_divide
         else:
             my_list[0] = 3
-            my_list[1] = 4
+            my_list[1] = 3
         args = tuple(my_list)
         # print(my_list[0])
         letters_count = self.total(args)
