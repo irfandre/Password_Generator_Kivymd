@@ -50,10 +50,11 @@ class GeneratorApp(MDApp):
     #     window.clearFlags(WindowManager.FLAG_TRANSLUCENT_STATUS)
     #     window.addFlags(WindowManager.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     #     window.setStatusBarColor(Color.parseColor(color))
-    #     window.setNavigationBarColor(Color.parseColor(color))
+    #     window.setNavigationBarColor(Color.parseColor('#fafafa'))
 
     def build(self):
         self.use_kivy_settings = False
+        # self.statusbar('#F59C8A')
         self.show = self.config.get('Example', 'bool')
         return self.screen
 
