@@ -16,5 +16,4 @@ class IntroScreen(MDScreen):
 
     def on_enter(self, *args):
         print("intro screen entered")
-        # COMMENT OUT BELOW LINE DURING DEVELOPMENT/ AND UNCOMMENT WHILE BUILDING
-        # self.app.statusbar('#F59C8A')
+        self.app.platform_check_for_statusbar('#F59C8A')

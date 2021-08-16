@@ -11,14 +11,6 @@ from settings_json import setting_json
 from kivy.utils import platform, get_color_from_hex
 
 
-## COMMENT OUT THE FOLLOWING DURING DEVELOPMENT / AND UNCOMMENT WHILE BUILDING
-# from android.runnable import run_on_ui_thread
-# from jnius import autoclass
-# Color = autoclass("android.graphics.Color")
-# WindowManager = autoclass('android.view.WindowManager$LayoutParams')
-# activity = autoclass('org.kivy.android.PythonActivity').mActivity
-## END COMMENT
-
 class ScreenManager(ScreenManager):
     pass
 
@@ -26,6 +18,18 @@ class ScreenManager(ScreenManager):
 # if platform in ('linux', 'linux2', 'macos', 'win'):
 if platform != 'android':
     Window.size = (350, 760)
+
+try:
+    from android.runnable import run_on_ui_thread
+    from jnius import autoclass
+
+    Color = autoclass("android.graphics.Color")
+    WindowManager = autoclass('android.view.WindowManager$LayoutParams')
+    activity = autoclass('org.kivy.android.PythonActivity').mActivity
+except ModuleNotFoundError:
+    pass
+except NotImplementedError:
+    pass
 
 
 class GeneratorApp(MDApp):
@@ -43,20 +47,34 @@ class GeneratorApp(MDApp):
         Window.bind(on_keyboard=self.on_back_button)
         Window.bind(on_request_close=self.show_alert_dialog)
 
-    #COMMENT OUT THIS FUNCTION DURING DEVELOPMENT / AND UNCOMMENT WHILE BUILDING
-    # @run_on_ui_thread
-    # def statusbar(self, color):
-    #     window = activity.getWindow()
-    #     window.clearFlags(WindowManager.FLAG_TRANSLUCENT_STATUS)
-    #     window.addFlags(WindowManager.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-    #     window.setStatusBarColor(Color.parseColor(color))
-    #     window.setNavigationBarColor(Color.parseColor('#fafafa'))
+    try:
+        @run_on_ui_thread
+        def statusbar(self, color):
+            window = activity.getWindow()
+            window.clearFlags(WindowManager.FLAG_TRANSLUCENT_STATUS)
+            window.addFlags(WindowManager.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.setStatusBarColor(Color.parseColor(color))
+            self.navigation_bar_color(window)
+    except NameError:
+        pass
+    except Exception as e:
+        print(e)
+
+    def navigation_bar_color(self, window):
+        if self.theme_cls.theme_style == 'Light':
+            window.setNavigationBarColor(Color.parseColor('#fafafa'))
+        else:
+            window.setNavigationBarColor(Color.parseColor('#121212'))
 
     def build(self):
         self.use_kivy_settings = False
-        # self.statusbar('#F59C8A')
+        self.platform_check_for_statusbar('#F59C8A')
         self.show = self.config.get('Example', 'bool')
         return self.screen
+
+    def platform_check_for_statusbar(self, color):
+        if platform == 'android':
+            self.statusbar(color)
 
     def on_start(self):
         print("from start ", self.show)
@@ -163,6 +181,13 @@ class GeneratorApp(MDApp):
             self.theme_cls.theme_style = "Dark"
         else:
             self.theme_cls.theme_style = "Light"
+        self.platform_check_for_statusbar(self.check_screen())
+
+    def check_screen(self):
+        if self.screen.current == 'intro_screen':
+            return '#F59C8A'
+        else:
+            return '#e67a70'
 
     def show_alert_dialog(self, *largs, **kwargs):
         if not self.dialog:
