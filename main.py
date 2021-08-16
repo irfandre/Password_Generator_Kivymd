@@ -9,6 +9,7 @@ from baseclass.introscreen import IntroScreen
 from kivy.core.window import Window
 from settings_json import setting_json
 from kivy.utils import platform, get_color_from_hex
+from kivy.uix.settings import SettingsWithNoMenu
 
 
 class ScreenManager(ScreenManager):
@@ -68,6 +69,7 @@ class GeneratorApp(MDApp):
 
     def build(self):
         self.use_kivy_settings = False
+        self.settings_cls = SettingsWithNoMenu
         self.platform_check_for_statusbar('#F59C8A')
         self.show = self.config.get('Example', 'bool')
         return self.screen
