@@ -15,6 +15,7 @@
 
         MDFloatLayout:
             orientation: 'vertical'
+            id: float_layout
             MyLabel:
                 id: result
                 pos_hint: {"center_x":0.5, "center_y":0.89}
@@ -31,10 +32,11 @@
 #                font_style: "H6"
                 padding: dp(20),1
                 allow_copy: True
+                y: dp(200)
 
             MyLabel:
-                pos_hint: {"center_x": 0.21, "center_y": 0.7}
-                size_hint: (.8, .1)
+                pos_hint: {"center_x": 0.12, "center_y": 0.7}
+                size_hint: (.8, None)
                 text: str(int(input_value.value))
                 halign: "center"
 #                font_style: "H7"
@@ -45,39 +47,56 @@
             MDSlider:
                 min: 0
                 max: 128
-                value: 128
+                value: 8
                 id: input_value
 #                value_track_color: [1,0.2,1,1]
                 pos_hint: {"center_x": 0.6, "center_y": 0.7}
-                size_hint: .5, None
+                size_hint: .73, None
                 hint: False
                 color: app.theme_cls.primary_color
                 on_value: root.value_check()
 
-            MyLabel:
-                text: "Special"
-                pos_hint: {"center_x": 0.7, "center_y":0.5}
-                theme_text_color: "Primary"
 
-            MDSwitch:
-                id: special_switch
-                pos_hint: {"center_x": 0.8, "center_y":0.5}
-                on_active:
-                    app.set_special_config()
-                    root.generate()
             MyLabel:
                 text: "Digits"
-                pos_hint: {"center_x": 0.7, "center_y":0.6}
+                pos_hint: {"center_x": 0.58, "center_y":0.6}
                 theme_text_color: "Primary"
 
             MDSwitch:
+                name: 'digits_switch'
                 id: digits_switch
-                pos_hint: {"center_x": 0.8, "center_y":0.6}
+                pos_hint: {"center_x": 0.87, "center_y":0.6}
                 on_active:
                     app.set_digits_config()
                     root.generate()
+            MyLabel:
+                text: "Special"
+                pos_hint: {"center_x": 0.58, "center_y":0.5}
+                theme_text_color: "Primary"
 
-            MDRaisedButton:
+            MDSwitch:
+                name: 'special_switch'
+                id: special_switch
+                pos_hint: {"center_x": 0.87, "center_y":0.5}
+                on_active:
+                    app.set_special_config()
+                    root.generate()
+
+            MyLabel:
+                text: "Uppercase"
+                pos_hint: {"center_x": 0.58, "center_y":0.4}
+                theme_text_color: "Primary"
+
+            MDSwitch:
+                name: "upper_switch"
+                id: upper_switch
+                pos_hint: {"center_x": 0.87, "center_y":0.4}
+                on_active:
+                    app.set_special_config()
+                    root.generate()
+#            MDLabel:
+#                text: result.text
+            MDFillRoundFlatButton:
                 id: regen_button
                 text: "[color=#ffffff]Regenerate Password[/color]"
                 pos_hint: {"center_x": 0.5, "center_y":0.18}
@@ -89,13 +108,14 @@
                 adaptive_size: True
 
 
-            MDRaisedButton:
+            MDFillRoundFlatButton:
                 id: copy_button
                 text: "[color=#ffffff]Copy Password[/color]"
                 pos_hint: {"center_x": 0.5, "center_y":0.1}
 #                size_hint: .7,None
                 on_release: root.cleaned_text()
                 adaptive_size: True
+
             MyLabel
 
 

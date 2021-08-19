@@ -18,7 +18,7 @@ class ScreenManager(ScreenManager):
 
 # if platform in ('linux', 'linux2', 'macos', 'win'):
 if platform != 'android':
-    Window.size = (350, 760)
+    Window.size = (350, 700)
 
 try:
     from android.runnable import run_on_ui_thread
@@ -43,6 +43,7 @@ class GeneratorApp(MDApp):
         self.screens_visited_list = []
         self.theme_cls.primary_palette = "Red"
         self.theme_cls.primary_hue = "A100"
+        self.theme_cls.primary_dark_hue = 'A700'
         self.screen = Builder.load_file("main.kv")
         self.title = "Password Generator"
         Window.bind(on_keyboard=self.on_back_button)
@@ -70,7 +71,6 @@ class GeneratorApp(MDApp):
     def build(self):
         self.use_kivy_settings = False
         self.settings_cls = SettingsWithNoMenu
-        self.platform_check_for_statusbar('#F59C8A')
         self.show = self.config.get('Example', 'bool')
         return self.screen
 
@@ -86,6 +86,8 @@ class GeneratorApp(MDApp):
         print(self.screens_visited_list)
         print("root", self.screen.ids.intro_screen.ids)
         print("root", self.screen.ids)
+        # self.platform_check_for_statusbar('#F59C8A')
+        # self.screen.current = 'generator_screen'
 
     '''
     {27: 'escape', 9: 'tab', 8: 'backspace', 13: 'enter', 127: 'del', 271: 'enter', 273: 'up', 274: 'down',
