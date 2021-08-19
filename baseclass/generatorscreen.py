@@ -68,18 +68,9 @@ class GeneratorScreen(MDScreen):
         return switcher.get(key, lowercase)
 
     def get_switch_key(self, dig, sp, upper):
-        if dig:
-            digit = 2
-        else:
-            digit = 0
-        if sp:
-            sp = 10
-        else:
-            sp = 0
-        if upper:
-            upper = 1
-        else:
-            upper = 0
+        digit = 2 if dig else 0
+        sp = 10 if sp else 0
+        upper = 1 if upper else 0
         print(digit + upper + sp)
         return digit + sp + upper
 
