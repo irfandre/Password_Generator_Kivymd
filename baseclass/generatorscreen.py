@@ -147,8 +147,10 @@ class GeneratorScreen(MDScreen):
         for i in final_string:
             if i.isnumeric():
                 colored_string += '[color=0073e5]' + i + '[/color]'
-            elif i.isalpha():
+            elif i.islower():
                 colored_string += i
+            elif i.isupper():
+                colored_string += '[color=1a936f]' + i + '[/color]'
             else:
                 colored_string += '[color=bc4b4b]' + i + '[/color]'
         print('Random string with', uppercase_count, 'uppercase', 'and',
