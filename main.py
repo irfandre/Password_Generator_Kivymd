@@ -151,6 +151,7 @@ class GeneratorApp(MDApp):
         elif key == 'saveoptions' and value == '1':
             self.set_digits_config()
             self.set_special_config()
+            self.set_uppercase_config()
         elif key == 'saveoptions' and value == '0':
             config.set("options", 'digits', '0')
             config.set("options", 'special', '0')
@@ -170,6 +171,14 @@ class GeneratorApp(MDApp):
             self.config.write()
         else:
             self.config.set("options", 'special', '0')
+            self.config.write()
+
+    def set_uppercase_config(self):
+        if self.screen.ids.generator_screen.ids.upper_switch.active:
+            self.config.set("options", 'uppercase', '1')
+            self.config.write()
+        else:
+            self.config.set("options", 'uppercase', '0')
             self.config.write()
 
     def toggle_intro_screen(self, value):
